@@ -29,20 +29,57 @@ def classify_intent(command):
     print(vectorized_input)
     return model.predict(vectorized_input)[0]
 
-def greet():
-    return "returning from function greet"
-def tell_time():
-    return "returning from function time"
+def greet(user_input):
+    """Greet the user based on input"""
+    if user_input == "hello":
+        return "Hello, how are you today?"
+    if user_input == "hi":
+        return "Hi, how are you today?"
+    if user_input == "hey":
+        return "Hey, how are you today?"
+    return "Hello, how are you today?"
+
+def tell_time(user_input):
+    """Tell the user the current time"""
+    ## create a model to identify city ?
+    return datetime.now().strftime("%H:%M")
+
 def tell_weather():
+    """Tell the user the current weather"""
     return "returning from function weather"
 def play_music():
+    """Play music"""
     return "returning from function music"
+def play_video():
+    return "returning from function video"
+def open_app():
+    return "returning from function app"
+def file_management():
+    return "returning from function file"
+def system_command():
+    return "returning from function system"
+def internet_browsing():
+    return internet_browsing
+def settings():
+    return "returning from function settings"
+def miscellaneous():
+    return "returning from function miscellaneous"
+
+
+# Intents = [ greet, time, weather, play_music, open_app, file_management, 
+# system command, internet_browsing, settings, miscellaneous]
 
 intent_map = {
     "greet": greet,
     "play_music":play_music,
     "weather": tell_weather,
-    "time":tell_time
+    "time":tell_time,
+    "open_app":open_app,
+    "file_management":file_management,
+    "system_command":system_command,
+    "internet_browsing":internet_browsing,
+    "settings":settings,
+    "miscellaneous":miscellaneous
 }
 
 
@@ -82,8 +119,8 @@ def assistant():
         intent = classify_intent(user_input.lower())
         print("intent---->",intent)
         action = intent_map.get(intent,lambda:"unable to understand")
-        print(action())
-        speak(action())
+        print(action(user_input))
+        speak(action(user_input))
         
 
 
